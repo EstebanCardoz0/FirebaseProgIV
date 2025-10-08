@@ -33,7 +33,7 @@ function getErrorResponseObject(error, message) {
   } else if (error instanceof ResourceNotFoundError) {
     response.status = httpStatusCodes.notFound;
   } else {
-    response.status = httpStatusCodes.internalServerError:
+    response.status = httpStatusCodes.internalServerError;
   }
 
   response.message = message;

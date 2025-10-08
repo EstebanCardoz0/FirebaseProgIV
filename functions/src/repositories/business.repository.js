@@ -17,7 +17,8 @@ async function getBusinessDataId(uid) {
     return []
   }
 
-  const businessDetailsPromises = companiesIds.map(async { businessId }=> {
+  const businessDetailsPromises = companiesIds.map(async (businessId) => {
+    
     const businessRef = db.ref(`business/${businessId}/businessData`)
     const snapshot = await businessRef.once('value')
     if (snapshot.exists()) {
@@ -34,5 +35,5 @@ async function getBusinessDataId(uid) {
 
 }
 
-module.exports={getBusinessDataId}
+module.exports = { getBusinessDataId }
 
