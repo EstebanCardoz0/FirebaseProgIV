@@ -12,6 +12,8 @@ module.exports = {
     "prettier",
   ],
   rules: {
+     "require-jsdoc": "warn",
+    "no-var": "warn",
     "no-restricted-globals": ["error", "name", "length"],
     "prefer-arrow-callback": "error",
     "quotes": ["error", "double", {"allowTemplateLiterals": true}],
