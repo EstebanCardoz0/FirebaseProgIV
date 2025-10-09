@@ -1,5 +1,5 @@
 const env = "dev"
-const { httpStatusCodes, DataValidationError, DatabaseError, AuthorizationError, ResourceNotFoundError } = require('')
+const { httpStatusCodes, DataValidationError, DatabaseError, AuthorizationError, ResourceNotFoundError } = require('./httpstatuscode')
 
 
 

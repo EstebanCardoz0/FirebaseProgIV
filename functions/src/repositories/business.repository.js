@@ -1,9 +1,11 @@
 // const { firebaseAdmin } = require('../utils/firebase'); el profe tiene pero yo no
 const admin = require('firebase-admin');
 
-const db = admin.database();
+// const db = admin.database(); del profe
 
 async function getBusinessDataId(uid) {
+
+  const db= admin.database(); //sugerido por gemini
   const userRef = db.ref(`users/${uid}`);
 
   //obtencion de los datos
