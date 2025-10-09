@@ -1,7 +1,10 @@
 const getBusinnesId = require('./business/getBusiness.service.js')
 
-module.exports={
+const createBusinessData = require('./business/createBusiness.service.js')
+
+module.exports = {
   ...getBusinnesId,
+  ...createBusinessData
 
 }
 //listo

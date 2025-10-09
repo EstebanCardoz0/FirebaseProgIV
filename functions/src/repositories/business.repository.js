@@ -1,3 +1,4 @@
+// const { firebaseAdmin } = require('../utils/firebase'); el profe tiene pero yo no
 const admin = require('firebase-admin');
 
 const db = admin.database();
@@ -17,8 +18,10 @@ async function getBusinessDataId(uid) {
     return []
   }
 
+
+
   const businessDetailsPromises = companiesIds.map(async (businessId) => {
-    
+
     const businessRef = db.ref(`business/${businessId}/businessData`)
     const snapshot = await businessRef.once('value')
     if (snapshot.exists()) {
@@ -35,5 +38,9 @@ async function getBusinessDataId(uid) {
 
 }
 
-module.exports = { getBusinessDataId }
+async function createBusinessDataBase(data) {
+
+}
+
+module.exports = { getBusinessDataId, createBusinessDataBase }
 

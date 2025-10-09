@@ -4,7 +4,7 @@ const functions = require('firebase-functions');
 const express = require('express');
 const cors = require("cors");
 
-const { getBusinessId } = require('../src/services/business.service');
+const { getBusinessId, createBusinessData } = require('../src/services/business.service');
 const { validateFirebaseIdToken } = require('../src/utils/middleware');
 const { getErrorResponseObject, getSuccessResponseObject } = require('../src/utils/utils');
 const { httpStatusCodes } = require('../src/utils/httpstatuscode');
@@ -13,7 +13,7 @@ const { httpStatusCodes } = require('../src/utils/httpstatuscode');
 const app = express();
 app.use(cors({ origin: true }));
 
-app.get('/', validateFirebaseIdToken, async (req, res) => {
+app.get('/',  async (req, res) => {
   try {
     const response = await getBusinessId(req.user.uid);
     return res.status(httpStatusCodes.ok).json(response);
@@ -23,11 +23,13 @@ app.get('/', validateFirebaseIdToken, async (req, res) => {
   }
 });
 
-app.post('/create-business', validateFirebaseIdToken, async (req, res) => {
 
-  try {
+
+app.post('/create-business' , async (req, res) => {
+try {
     const data = req.body;
-    //const response= await createBusiness(data);
+    // console.log('CREATE Business Endpoint', data)
+    const response= await createBusinessData(data);
     return res.status(httpStatusCodes.created).json(response);
   } catch (error) {
     const ErrorResponse = getErrorResponseObject(error, "ALgo salió mal");
@@ -35,7 +37,7 @@ app.post('/create-business', validateFirebaseIdToken, async (req, res) => {
   }
 });
 
-app.put('/update-business', validateFirebaseIdToken, async (req, res) => {
+app.put('/update-business', async (req, res) => {
 
   try {
     const data = req.body;
@@ -47,7 +49,7 @@ app.put('/update-business', validateFirebaseIdToken, async (req, res) => {
   }
 });
 
-app.delete('/delete-business', validateFirebaseIdToken, async (req, res) => {
+app.delete('/delete-business', async (req, res) => {
 
   try {
     const data = req.body;
