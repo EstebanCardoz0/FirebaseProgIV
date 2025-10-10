@@ -1,44 +1,49 @@
-require('../config/environment')
+require("../config/environment");
 
-const functions = require('firebase-functions');
-const express = require('express');
+const functions = require("firebase-functions");
+const express = require("express");
 const cors = require("cors");
+const { getBusinessId,
+  createBusinessData,
+} = require("../src/services/business.service");
 
-const { getBusinessId, createBusinessData } = require('../src/services/business.service');
-const { validateFirebaseIdToken } = require('../src/utils/middleware');
-const { getErrorResponseObject, getSuccessResponseObject } = require('../src/utils/utils');
-const { httpStatusCodes } = require('../src/utils/httpstatuscode');
+const { validateFirebaseIdToken } = require("../src/utils/middleware");
+const {getErrorResponseObject, getSuccessResponseObject, } = require("../src/utils/utils");
+const { httpStatusCodes } = require("../src/utils/httpstatuscode");
+
 
 //instanciar una app express
 const app = express();
 app.use(cors({ origin: true }));
 
-app.get('/',  async (req, res) => {
+app.get("/", async (req, res) => {
   try {
-    const response = await getBusinessId(req.user.uid);
+    const businessId = req.query.businessId;
+    console.log("busines IDDDDDDD: " + businessId);
+    const response = await getBusinessId(businessId);
     return res.status(httpStatusCodes.ok).json(response);
+
   } catch (error) {
     const ErrorResponse = getErrorResponseObject(error, "Algo salio mal");
     return res.status(httpStatusCodes.internalServerError).json(ErrorResponse);
   }
 });
 
-
-
-app.post('/create-business' , async (req, res) => {
-try {
+app.post("/create-business", async (req, res) => {
+  try {
     const data = req.body;
-    // console.log('CREATE Business Endpoint', data)
-    const response= await createBusinessData(data);
+    // console.log("CREATE Business Endpoint", data);
+    const response = await createBusinessData(data);
+
     return res.status(httpStatusCodes.created).json(response);
-  } catch (error) {
-    const ErrorResponse = getErrorResponseObject(error, "ALgo salió mal");
+  }
+  catch (error) {
+    const ErrorResponse = getErrorResponseObject(error, "Algo salió mal");
     return res.status(httpStatusCodes.internalServerError).json(ErrorResponse);
   }
 });
 
-app.put('/update-business', async (req, res) => {
-
+app.put("/update-business", async (req, res) => {
   try {
     const data = req.body;
     //const response= await updateBusinessData(data);
@@ -49,8 +54,7 @@ app.put('/update-business', async (req, res) => {
   }
 });
 
-app.delete('/delete-business', async (req, res) => {
-
+app.delete("/delete-business", async (req, res) => {
   try {
     const data = req.body;
     //const response= await updateBusiness(data.businessId);
@@ -61,4 +65,5 @@ app.delete('/delete-business', async (req, res) => {
   }
 });
 
-//listo al parecer
+//exportar como cloud function
+module.exports = functions.https.onRequest(app);

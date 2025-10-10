@@ -1,0 +1,6 @@
+# Ignorer archivos específicos si quieres
+# src/utils/firebase.js
+# index.js
+
+# O ignorar carpetas completas
+# src/

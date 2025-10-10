@@ -3,7 +3,8 @@ const {  createBusinessDataBase } = require("../../repositories/business.reposit
 async function createBusinessData
   (data) {
   try {
-    const business = await createBusinessDataBase(userUID);
+    // console.log('CREATE business SERVICE', data)
+    const business = await createBusinessDataBase(data);
     return business;
   } catch (error) {
 

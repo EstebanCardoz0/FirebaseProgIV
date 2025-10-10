@@ -1,8 +1,8 @@
 const { getBusinessDataId } = require("../../repositories/business.repository.js");
 
-async function getBusinnesId(userUID) {
+async function getBusinessId(businessId) {
   try {
-    const business = await getBusinessDataId(userUID);
+    const business = await getBusinessDataId(businessId);
     return business;
   } catch (error) {
 
@@ -10,6 +10,6 @@ async function getBusinnesId(userUID) {
 }
 
 module.exports = {
-  getBusinnesId
+  getBusinessId
 }
-//listo
+//listoa

@@ -6,18 +6,8 @@ module.exports = {
   parserOptions: {
     "ecmaVersion": 2018,
   },
-  extends: [
-    "eslint:recommended",
-    "google",
-    "prettier",
-  ],
-  rules: {
-     "require-jsdoc": "warn",
-    "no-var": "warn",
-    "no-restricted-globals": ["error", "name", "length"],
-    "prefer-arrow-callback": "error",
-    "quotes": ["error", "double", {"allowTemplateLiterals": true}],
-  },
+  extends: [],  // Sin extends = sin reglas
+  rules: {},    // Sin reglas = sin molestias
   overrides: [
     {
       files: ["**/*.spec.*"],

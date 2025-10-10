@@ -31,5 +31,5 @@
 //   response.send("Hello from Firebase!");
 // });
 
-require("./firebase") //sugerido por gemini
-exports.business = require("./modules/business")
+require("./src/utils/firebase"); //sugerido por gemini
+exports.business = require("./modules/business");
